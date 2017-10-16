@@ -1,0 +1,42 @@
+Simple Factory
+
+class Singleton(object):
+	"""
+	single method
+
+	"""
+	class _A(object):
+
+		""" 
+		the one who are working 
+		"""
+
+		def __init__(self):
+			pass
+
+		def display(self):
+
+			""" return the instance ID , """
+
+			return id(self)
+
+	_instance = None
+
+	def __init__(self):
+		""" judge the varible """
+
+		if Singleton._instance is None:
+			Singleton._instance = Singelton._()
+
+	def __getattr__(self, attr):
+		""" all the attra will directly receive from Singleton._instance """
+		return getattr(self._instance, attr)
+
+if __name__=='__main__':
+
+	# create the instance 
+	s1 = Singleton()
+	s2 = Singleton()
+	print(id(s1), s1.display())
+	print(id(s2), s2.display())
+

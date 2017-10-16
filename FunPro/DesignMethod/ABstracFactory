@@ -1,0 +1,92 @@
+Abstract Factory
+
+
+import random
+import abc
+
+class BasicCourse(object):
+
+	"""
+	basic
+	
+	"""
+
+	def get_labs(self):
+		return "basic_course: labs"
+
+	def __str__(self):
+
+		return "BasicCocurse"
+
+class ProjectCourse(object):
+
+	"""
+	project 
+	
+	"""
+
+	def get_labs(self):
+		return "project_course: labs"
+
+	def __str__(self):
+		return "ProjectCourse"
+
+# two kinds of virtual 
+class LinuxVm(object):
+	"""
+	Linux VMvare
+	"""
+	
+	def start(self):
+
+		return "Linux vm running"
+
+class MacVm(object):
+
+	"""
+	Mac osx vmware
+
+	"""
+	def start(self):
+		return "Mac OSX Vm running"
+
+class Factory(object):
+
+	"""
+	abstract factory , now the factory can create class and VMware at the sametime.
+	"""
+	__metaclass__ = abc.ABCMeta
+
+	@abc.abstractmethod
+	def create_course(self):
+		pass 
+	
+	@abc.abstractmethod
+	def create_vm(self):
+		pass
+class BasicCourseLinuxFactory(Factory):
+	""
+	basci factory 
+	""
+
+	def create_course(self):
+		return BasicCourse()
+
+	def create_vm(self):
+		return LinuxVm()
+def get_factory():
+	"""
+	get a facotyr
+
+    """
+
+	return random.choice([BasicCourseLinuxFactory, ProjectCourseMacFactory])()
+
+if __name__='__main__':
+	factory = get_factory()
+	course  = factory.create_course()
+	vm = factory.create_vm()
+	print(course.get_labs())
+	print(vm.start())
+
+

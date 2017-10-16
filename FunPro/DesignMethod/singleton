@@ -1,0 +1,44 @@
+# Singleton(object):
+
+class Singleton(object):
+	"""
+	singleton
+	"""
+
+	class _A(object):
+	
+		"""
+		the one who is actually doing things, hiden from outside
+		"""
+
+		def __init__(self):
+			pass
+
+		def display(self):
+		
+			""" return the only  case .
+			
+			return id(self)
+
+	_instance = None
+
+	def __init__(self):
+
+		if Singleton._instance is None:
+			Singleton._instance = Singeleton._A()
+
+	def __getatter__(self, attr):
+
+		""" all the attribute are directly from Singeleton.instance ""
+		
+		return getatter(self._instance, attr)
+
+if __name__='__main__':
+
+	# instance 
+
+	s1 = Singleton()
+	s2 = Singeleton()
+	print(id(s1), s1.display())
+	print(id(s2), s2.display())
+		
