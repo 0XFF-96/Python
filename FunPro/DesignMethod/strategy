@@ -1,0 +1,25 @@
+
+class Question(object):
+	"""
+	question , withou startegy
+
+	"""
+	
+	def __init__(self, admin=True):
+		self._admin = admin
+
+	def show(self):
+		"""
+		according to the manager to show different information
+		
+		"""
+		if self._admin is True:
+			return "show page with admin"
+		else:
+			return "show page with user"
+if __name__ == '__main__':
+
+	q = Question(admin=False)
+	print(q.show())
+
+	
