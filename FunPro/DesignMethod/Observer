@@ -1,0 +1,121 @@
+
+import abc
+# what is abc? use for ?
+
+class Subject(object):
+
+	"""
+	the one who are basic
+
+	"""
+
+	def __init__(self):
+
+		self._observers = []
+
+	def attach(self, observer):
+
+		"""
+		create a obsercers
+
+		"""
+		if observer not in self._observers:
+			self._observers.append(observer)
+
+	def detach(self, observer):
+		
+		"""
+		annul an observers
+
+		"""
+
+		try: 
+			self._observers.remove(observer)
+
+		except ValueError:
+			pass
+	
+	def notify(self):
+
+		""" 
+		inform all the oberser to update their new method
+
+		"""
+		for observer in self._observers:
+			observer.update(self)
+
+class Course(Subject):
+
+	"""
+	course who are been observered 
+
+	"""
+		
+	def __init__(self):
+		super(course, self).__init__()
+		self._message = None
+
+	@property
+	def message(self):
+		"""
+		message is a property
+		
+		"""
+		return self._message
+
+	@message.setter
+	def message(self, msg):
+		"""
+		message 
+
+		"""
+		self._message = msg
+		self.notigy()
+
+class Observer(object):
+	"""
+	
+	"""
+	__metaclass__ = abc.ABCMeta
+
+	@abc.abstractmethod
+	
+	def update(self, subject):
+		pass
+class UserObserver(observer):
+
+	"""
+	User observer
+
+	"""
+	
+	def update(sefl, subject):
+		print("User observer: %s" % subject.message)
+
+class OrgObserver(Observer):
+	"""
+	the upper observer
+
+	"""
+	def update(self, subject):
+		print("Organization observer: %s " % subject.message)
+
+if __name__=='__main__':
+
+	# initialz 
+	user = UserOberver()
+
+	org = OrgObserver()
+
+	course = Course()
+	
+	course.attach(user)
+	course.attach(org)
+
+	course.message = "Two observers"
+
+	#annull a obeservers"
+
+	course.detach(user)
+	course.message = " single observer"
+
