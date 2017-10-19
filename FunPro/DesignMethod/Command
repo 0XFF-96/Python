@@ -1,0 +1,119 @@
+Command Method
+
+import abc 
+
+class VMReceiver(object):
+
+	"""
+	the one who actually excute the command
+
+	"""
+
+	def start(self):
+
+		print("Virtual machine start")
+
+	def stop(self):
+
+		print("Virtual machine stop")
+
+class Command(object):
+
+	"""
+
+	command abstract class 
+	
+	"""
+
+	__metaclass__ = abc.ABCMeta
+
+	@abc.abstractmethod 
+
+	def execute(self):
+
+		"""
+		command object only provide the method of execute to external'
+	
+		"""
+
+		pass
+
+class StartVmCommand(Command):
+
+
+	"""
+	start the virtual command 
+
+	"""
+
+	def __init__(self, recevier):
+
+		"""
+		initialize the recevier who take only one parameter
+
+		"""
+		self.recevieer = recevier
+
+	def execute(self):
+	
+		"""
+		actuall execute the command and activate the virtualmachine
+
+		"""
+		self.recevier.start()
+
+class StopVmCommand(Command):
+
+	"""
+	stop VmWare 
+
+	"""
+
+	def __init__(self, recevier):
+
+		"""
+		initialize the command recevier
+
+		"""
+	def execute(self):
+
+		"""
+		the one who actually shut down the machine
+
+		"""	
+		self.recevier.stop()
+
+class ClientInvoker(object):
+
+	"""
+	command calleer 
+
+	"""
+
+	def __init__(self, command):
+
+		self.command = command 
+
+	def do(self):
+		
+		self.command.execute()
+
+if__name__=='__main__':
+
+	recevier = VmReceiver()
+
+	start_command = StartVmCommand(recevier)
+	# command the who is clint ,and also who actually excute the command
+
+
+	client = ClientInvoker(start_command)
+	client.do()
+
+	#told the receiver do different operation
+
+	stop_command = StopVmCommand(recevier)
+	client.command = stop_command
+	client.do()
+
+
+

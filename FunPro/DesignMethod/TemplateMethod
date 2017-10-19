@@ -1,0 +1,121 @@
+
+
+import abc
+
+
+class Fishing(object):
+
+	"""
+	Fishing Method 
+
+	"""
+
+	__metaclass__ = abc.ABCMeta
+
+	def finishing(self):
+
+		"""
+		in Finishing , make sure what kind of operation do you want
+
+		"""
+
+		self.prepare_bait()
+		self.go_to_riverbank()
+		self.find_location()
+		
+		print("Start fishing")
+
+		@abc.abstractmethod
+
+	def prepare_bait(self):
+	
+		pass
+
+	@abc.abstractmethod
+		
+	def go_to_riverbank(self):
+
+		pass
+
+	@abc.abstractmethod
+	def find_location(self):
+
+		pass
+
+class JohnFishing(Fishing):
+
+	"""
+	John also want to go to fish
+
+	"""
+
+	def prepare_bait(self):
+
+		"""
+		bought the bait from taobao
+
+		"""
+
+		print("John : buy bait from Taobao")
+
+	def to_to_riverbank(self):
+
+		"""
+		to to fish by car
+
+		"""
+
+		print("John: to river by driving")
+
+	def find_location(self):
+
+		"""
+		pick a location 
+
+		"""
+		print("John: select location on the island")
+
+class SimonFishing(Fishing):
+
+	"""
+	Simon also want to go to fishing 
+
+	"""
+
+	def prepart_bait(self):
+
+		"""
+		JD
+		"""
+		print("Simon : buy bait from JD")
+
+	def go_to_riverbank(self):
+		
+		"""
+		by bike
+
+		"""
+
+		print("Simon: to river by biking")
+
+	def find_location(self):
+	
+		"""
+		waiting beside the river
+
+		"""
+		print("Simon: select location on the riverbank")
+
+if __name__=='__main__':
+
+	#John went to fish
+
+	f = JohnFishing()
+	f.finishing()
+
+	#Simon
+
+	f = SimonFishing()
+	f.finishing()
+
+
