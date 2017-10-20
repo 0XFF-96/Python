@@ -1,0 +1,59 @@
+
+## Decorator
+
+from functools import wraps
+
+HOST_DOCKER = 0
+
+def docker_host_required(f):
+
+	"""
+	decoratro , must require the host HOST_DOCKER
+
+	"""
+
+	@wraps(f)
+	def wrapper(*args, **kwargs):
+
+		if args[0].type != HOST_DOCKER:
+
+			raise Exception("NOT docker host")
+
+		else:
+			
+			return f(*args, **kwargs)
+
+	return wrapper
+
+class HOST(object):
+
+	"""
+	host class 
+
+	"""
+
+	def __init__(self, type):
+
+		self.type = type
+
+	# decorator 
+	@docker_host_required
+
+	def create_container(self):
+
+		print("create container")
+
+if __name__=='__main__':
+
+	#initial the Host 
+
+	host = Host(HOST_DOCKER)
+	host.create_container()
+
+	print("")
+	#initialize the Host
+	
+	host = Host(1)
+	host.create_container()
+
+
