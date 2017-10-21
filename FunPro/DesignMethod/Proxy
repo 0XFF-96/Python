@@ -1,0 +1,117 @@
+Proxy
+
+from time import sleep
+
+class Redis(object):
+
+	"""
+	Use fof simulaite the redis service
+
+	"""
+
+	def __init__(self):
+
+		"""
+		save dict data
+
+		"""
+		self.cache = dict()
+
+	def get(self, key):
+
+		"""
+		get the data
+
+		"""
+		return self.cache.get(key)
+
+	def set(self, key, value):
+
+		"""
+		set the data
+
+		"""
+		self.cache[key] = value
+
+class Image(object):
+
+	"""
+		image object , are saved in the storage, addresss
+
+	"""
+	def __init__(self, name):
+		
+		self.name = name
+
+	@property
+	def url(self):
+
+		sleep(2)
+		
+		return "https://"
+
+class Page(object):
+
+	""" 
+	for showing the picture
+	
+	"""
+
+	def __init__(self, image):
+
+		"""
+		you need to initialize the pictures
+
+		"""
+		self.image = image
+
+	def render(self):
+
+		"""
+		show picture 
+		
+		"""
+		print(self.image.url)
+
+redis = Redis()
+
+class ImageProxy(object):
+
+	""" 
+	the Image Proxy , every we get the real picture , we search the Redis
+	
+	"""
+
+	def __init__(self, image):
+	
+		self.iamge = image
+
+	@property
+	def url(self):
+
+		addr = redis.get(self.image.name)
+
+		if not addr:
+
+			addr = self.image.url
+			print("Set url in redis cache!")
+
+		else:
+			
+			print("Get url from redis cache!")
+
+		return addr 
+
+if __name__=='__main__':
+
+	img = Image(name="logo")
+	proxy = ImageProxy(img)
+	page =Page(proxy)
+
+	page.render()
+	print("")
+
+	#the second time
+	page.render()
+
+
