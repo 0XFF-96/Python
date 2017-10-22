@@ -1,0 +1,57 @@
+
+class Lamp(object):
+
+	"""
+	object Lamp
+	
+	"""
+
+	def power_off(self):
+
+		print("Lamp power off")
+
+class Fan(object):
+
+	"""
+
+	Fan
+	
+	"""
+	
+	def switch_off(self):
+		
+		print("Fan switch off")
+
+class Tv(object):
+
+	"""
+	TV
+	"""
+	
+	def off(self):
+
+		print("TV off)
+
+class Person(object):
+
+	"""
+	people
+	
+	"""
+	def __init__(self):
+
+		self.lamp = Lamp()
+		self.fan = Fan()
+		self.tv = Tv()
+
+	def leave_home(self):
+
+		"""
+		going out for a walking , and shutting down all the applianct
+		
+		"""
+		self.lamp.power_off()
+		self.fan.switch_off()
+		self.tv.off
+
+
