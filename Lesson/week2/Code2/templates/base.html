@@ -1,0 +1,15 @@
+<body>
+    <div>
+       {% block header %}
+           <p> this is header </p>
+       {% endblock %}
+    <div>
+    <div> {% block content %}{% endblock %}</div>
+    <div id="footer">
+        {% block footer %}
+        &copy; Copyright 2017 by <a href="https://www.shiaynlou.com/">sh</a>
+        {% endblock %}
+    </div>
+</body>
+
+

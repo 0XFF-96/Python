@@ -1,0 +1,42 @@
+<h1> hello world</h1>
+
+<p> name: {{ course.name}}</p>
+<p>user count: {{ course.user_count }}</p>
+<p>teacher : {{ course.teacher }} </p>
+<p> is_private: {{ course.is_private }}</p>
+<p> not exist: {{ course.not_exist }} </p>
+
+
+{% if course.is_private %}
+
+    <p> course {{ course.name}} is private </p>
+{% elif course.is_member_course %}
+    <p> course {{ course.name }} is member course </P>
+{% else %}
+    <p> course {{ course.name }} is normal course <p>
+{% endif %}
+
+{% macro course_item(course, type="bootstrap") %}
+    <div>
+       <p>type: {{ type }} </p>
+       <p> name: {{ course.name }}</p>
+       <p> user count: {{ course.user_count }}</p>
+       <p> teacher: {{ course.teacher }} </p>
+       <p> is_private: {{ course.is_private }} </p>
+    </div>
+{% endmacro %}
+
+<div> {{ course_item(course) }} </div>
+<p> {{ '=' * 20 }} </p>
+<div> {{ course_item(course, type="louplus") }} </div>
+
+{% extends "base.html" %}
+{% from 'macro.html' import course_item %}
+
+{% block header %}
+    <h1> header </h1>
+{% block content %}
+    {{ course_item(course) }}
+{% endblock %}
+
+
