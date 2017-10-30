@@ -1,4 +1,4 @@
-from flask import Flask, abort, redirect,url_for
+from flask import Flask, abort,render_template,  redirect,url_for
 import os
 
 
@@ -18,11 +18,17 @@ def index():
 
 
 
-@aapp.route('files/<filename>')
+@app.route('/files/<filename>')
 def file(filename):
     # read filename.json content
 
+    pass
 
-@app.errorhandler(404)
-def not_found(error):
-    return render_template('404.html'),404
+
+#@app.errorhandler(404)
+#def not_found(error):
+#    return render_template('404.html'),404
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
