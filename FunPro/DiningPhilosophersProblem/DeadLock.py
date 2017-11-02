@@ -17,7 +17,7 @@ class Philosopher(threading.Thread):
 		self.index = index
 		self.leftFork = forks[self.index]
 		
-		self.rightFork = forks[(self.index +!) % numForks]
+		self.rightFork = forks[(self.index + 1) % numForks]
 
 	def run(self):
 
@@ -28,7 +28,7 @@ class Philosopher(threading.Thread):
 			self.dinning()
 
 			self.leftFork.putdown()
-			self.rigthFork.putdown()
+			self.rightFork.putdown()
 			self.thinking()
 
 	def dinning(self):
@@ -79,4 +79,4 @@ if __name__=='__main__':
 	except Exception, e:
 		raise e
 
-	
+
