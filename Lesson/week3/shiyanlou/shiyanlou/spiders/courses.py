@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from items import CourseItem
+from shiyanlou.items import CourseItem
 
 class CoursesSpider(scrapy.Spider):
     name = 'courses'

@@ -8,7 +8,13 @@
 import scrapy
 
 
-class ShiyanlouItem(scrapy.Item):
+class CourseItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    
+    name =scrapy.Field()
+    description =scrapy.Field()
+    type = scrapy.Field()
+    students = scrapy.Field()
+
+

@@ -11,16 +11,15 @@ from shiyanlou.models import Course, engine
 
 class ShiyanlouPipeline(object):
     def process_item(self, item, spider):
-        return item['students'] = int(item['students'])
+        item['students'] = int(item['students'])
 
 #    Course(
 #            name = item['name']
 #            type = item['type']
 
+        self.session.add(Course(**item))
+        return item
 
-    self.session.add(Course(**item))
-
-    return item
 
 
     def open_spider(self, spider):
@@ -40,7 +39,7 @@ class ShiyanlouPipeline(object):
         when spider close , commit session, 
         """
 
-        self.seesion.commit()
+        self.session.commit()
         self.session.close()
 
 
