@@ -1,22 +1,19 @@
 """ rmon.model
 
-该模块实现了所有的 model 类以及相应的序列化类
 """
 from flask_sqlalchemy import SQLAlchemy
 
 from datetime import datetime
 
 db = SQLAlchemy()
+from redis import StrictRedis, RedisError
 
 
 class Server(db.Model):
-    """Redis服务器模型
-    """
 
     __tablename__ = 'redis_server'
 
     id = db.Column(db.Integer, primary_key=True)
-    # unique = True 设置不能有同名的服务器
     name = db.Column(db.String(64), unique=True)
     description = db.Column(db.String(512))
     host = db.Column(db.String(15))
@@ -29,13 +26,34 @@ class Server(db.Model):
         return '<Server(name=%s)>' % self.name
 
     def save(self):
-        """保存到数据库中
-        """
         db.session.add(self)
         db.session.commit()
 
     def delete(self):
-        """从数据库中删除
-        """
         db.session.delete(self)
         db.session.commit()
+
+
+class Server(db.Model):
+    pass
+
+    def ping(self):
+        """
+        """
+        pass
+
+    def get_metrics(self):
+        """ receive info from Redis service 
+        
+        By the instruction of Redis , return the monitor information        
+        Reference : https://redis.io/commmands/INFO
+        """
+
+        pass
+
+    @property
+    def redis(self):
+        return StrictRedis(host=self.host, port=self.port, password=self.password)
+
+
+
