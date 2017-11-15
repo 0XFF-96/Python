@@ -40,7 +40,11 @@ class Server(db.Model):
     def ping(self):
         """
         """
-        pass
+        try:
+            return self.redis.ping()
+        except RedisError:
+            raise RestException(400, 'rediserver %s can not connected' % self.host)
+
 
     def get_metrics(self):
         """ receive info from Redis service 
@@ -49,7 +53,11 @@ class Server(db.Model):
         Reference : https://redis.io/commmands/INFO
         """
 
-        pass
+        try : 
+            return self.redis.info()
+        except RedisError:
+            raise RestException(400,'redis server %s can not connected ' % self.host)
+
 
     @property
     def redis(self):
